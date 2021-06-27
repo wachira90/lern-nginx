@@ -45,3 +45,27 @@ location ~ \.php$ {
     include fastcgi_params;
 }
 ```
+
+
+## location / ( root path )
+
+```
+location / {
+    # autoindex on;
+    root   html/www.ci4.com/public/;
+    index  index.html index.htm index.php;
+    try_files $uri $uri/ /index.php?/$request_uri;
+    #try_files $uri $uri/ /index.php?$query_string;
+    # rewrite ^/testrw/(.*)$ /test.php?id=$1 last;
+}
+```
+
+
+## server port
+
+```
+listen 8080;
+listen [::]:8080;
+listen 443 ssl http2;
+listen [::]:443 ssl http2;
+```
