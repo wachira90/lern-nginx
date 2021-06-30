@@ -1,6 +1,7 @@
 # nginx log to server
 
 http://techies-world.com/configure-nginx-to-send-logs-to-rsyslog/
+
 ```
 nano /etc/nginx/nginx.conf
 ```
@@ -19,14 +20,25 @@ nano /etc/rsyslog.conf
 ```
 
 Step2: Add the following line before the line => $IncludeConfig /etc/rsyslog.d/*.conf
+
 ```
 $ModLoad imfile
 ```
+
+and end file 
+
+```
+*.* @203.159.241.122:514
+```
+
 Step3: Create a new file for nginx rsyslog configuration
+
 ```
 nano /etc/rsyslog.d/nginx.conf
 ```
+
 Step4: Update the following lines.
+
 ```
 # error log
 $InputFileName /var/log/nginx/error.log
@@ -50,6 +62,7 @@ $InputRunFileMonitor
 Step5: Restart rsyslog nginx service
 ```
 systemctl restart nginx rsyslog
+systemctl enable nginx rsyslog
 
 ```
 
