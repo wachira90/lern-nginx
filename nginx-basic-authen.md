@@ -43,7 +43,7 @@ superadmin:$apr1$KP2BeDbF$0NNvPpE/WiGkZei59o/pA0
 ```
 location /api {
     auth_basic           “Administrator’s Area”;
-    auth_basic_user_file /etc/apache2/.htpasswd; 
+    auth_basic_user_file /etc/nginx/.htpasswd; 
 }
 ```
 
@@ -54,7 +54,7 @@ Alternatively, you you can limit access to the whole website with basic authenti
 server {
     ...
     auth_basic           "Administrator’s Area";
-    auth_basic_user_file conf/htpasswd;
+    auth_basic_user_file /etc/nginx/.htpasswd;
 
     location /public/ {
         auth_basic off;
