@@ -1,6 +1,17 @@
 # lern-nginx
 lern-nginx
 
+## port 80 redirect 443
+
+````
+server {
+    listen 80;
+    listen [::]:80;
+    server_name  localhost;
+    return 301 https://$host$request_uri;
+}    
+````
+
 ## add php
 ````
 location ~ \.php$ {
