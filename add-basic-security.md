@@ -106,4 +106,34 @@ ssl_prefer_server_ciphers on;
 
 ````
 
+## ex1
 
+````
+sendfile on;
+tcp_nopush on;
+tcp_nodelay on;
+keepalive_timeout 65;
+types_hash_max_size 2048;
+server_tokens off;
+
+client_body_buffer_size 1k;
+client_header_buffer_size 1k;
+#client_max_body_size 1k; # UPLOAD
+client_max_body_size 100M;
+large_client_header_buffers 2 1k;
+
+add_header X-XSS-Protection "1;mode=block";
+add_header X-Frame-Options "DENY";
+#add_header X-Frame-Options "SAMEORIGIN";
+add_header X-Content-Type-Options nosniff;
+add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubdomains; preload";
+
+add_header Set-Cookie "Path=/; HttpOnly; Secure";
+
+#FOR PROXY
+proxy_cookie_path / "/; HTTPOnly; Secure";
+
+server_names_hash_bucket_size 64;
+# server_name_in_redirect off;
+````
